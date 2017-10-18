@@ -1,0 +1,67 @@
+label {
+    -webkit-perspective: 1000px;
+    transform-style: preserve-3d;
+    width: 100px;
+    height: 90px;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+
+}
+
+#info{
+    background-color: red;
+    height: 70px;
+}
+
+
+.card {
+    position: absolute;
+    height: 100px;
+    width: 90px;
+    transform-style: preserve-3d;
+    transition: all 600ms;
+    z-index: 20;
+}
+
+    .card div {
+        position: absolute;
+        height: 100px;
+        width: 90px ;
+        background: #FFF;
+        text-align: center;
+        backface-visibility: hidden;
+        border-radius: 2px;
+    }
+
+    .card .back {
+        
+        -webkit-transform: rotateX(180deg);
+        transform: rotateX(180deg);
+    }
+
+label:hover .card {
+    -webkit-transform: rotateX(20deg);
+    transform: rotateX(20deg);
+}
+
+input {
+    display: none;
+}
+
+:checked + .card {
+    transform: rotateX(180deg);
+    -webkit-transform: rotateX(180deg);
+}
+
+label:hover :checked + .card {
+    transform: rotateX(160deg);
+    -webkit-transform: rotateX(160deg);
+
+}
+
+table {
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	margin-left: 100px;
+}
