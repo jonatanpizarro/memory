@@ -60,17 +60,14 @@
 
 			<div id="fil">
 		
-				<label for="fila">Columnas</label>
-				
-				<input type="number" name="fila">
+				<select name="OS">
+				   <option name ="a" value="4x4">4x4</option> 
+				   <option name ="a" value="6x6">6x6</option> 
+				   <option name ="a" value="8x8">8x8</option>
+				   </select>
 			</div>
 
-			<div id="col">
-				<label for="colum">Filas  </label>
-				
-				<input type="number" name="colum"/>
 
-			</div>
 
 			
 			<input type="submit" id="iniciar" value="Empezar juego"/>	

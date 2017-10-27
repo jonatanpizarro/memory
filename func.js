@@ -1,87 +1,154 @@
 var clics2=0;
-var clicks=0;
 var carta1;
 var carta2;
-var label1;
 var puntuacion =0;
 var intentos =0;
 var bloqueo;
 var cartas=0;
-
-/*function start(pos,id){
-		bloquear(pos);
-	    comprobar(pos,id);
-
-}*/
+var tiempo=0;
+var parejas=0;
+var contador=0;
 
 
+
+function cronometro(){
+	contador_s=0;
+	contador_m=0;
+	s=document.getElementById("seg");
+	m=document.getElementById("min");
+
+	crono =setInterval(
+		function(){
+			if(contador_s==60){
+				contador_s=0;
+				contador_m++;
+				m.innerHTML=contador_m;
+
+				if(contador_m==60){
+					contador_m=0;
+				}
+			}
+			s.innerHTML=contador_s;
+			contador_s++;
+		},1000);
+}
+
+function puntos(){
+	puntuacion++;
+	document.getElementById("puntos").innerHTML="Puntos :"+puntuacion;
+
+}
 
 function bloquear(pos){
-	document.getElementById("check"+pos).disabled=true;
+	document.getElementById("check"+pos).disabled=true;  //Si la carta esta de cara no te deja volver a clickar
 
 }
 
-function desbloquear(pos,pos1){
-	document.getElementById("check"+pos).disabled=false;
-	document.getElementById("check"+pos1).disabled=false;
-}
 
-function darVuelta(a,b){
+function darVuelta(a,b){   //Funcion para dar la vuelta a las cartas que no son iguales
 	a.click();
 	b.click();
 }
 
+
 function intentos1(intentos){
-	document.getElementById('intentos').innerHTML="Intentos :"+intentos;
+	document.getElementById('intentos').innerHTML="Intentos :"+intentos; //Cuenta los intentos
 }
 
-function bloquearTodo(pos){
-	for (var i =0; i<=cartas ; i++) {
-		document.getElementById("check"+i).disabled=true;
+function ayuda(){
+	
+	//total=parejas*2;
+
+	for (var i = 0; i <totalCartas; i++) {
+		
+		la=document.getElementsByClassName('card')[i];        //Gira todas las cartas
+		la.click();
+	}	
+
+	setTimeout( function(){         
+				for (var i = 0; i <totalCartas; i++) {
+		
+		la=document.getElementsByClassName('card')[i].parentNode;        
+		la.click();
 	}
+			} , 2000);
+	
+	intentos=intentos+parejas;
+	intentos1(intentos);
 }
 
-function borraId(pos1,pos2){
-	document.getElementsById(pos1).removeAttribute("id");
-	document.getElementsById(pos2).removeAttribute("id");
-
-}
-
-function cogerValor(total){
-	cartas=total*2;
+function valor(par){
+	parejas=par;
+	totalCartas=par*2;          //Sirve para coger todas las cartas que hay en el tablero
+	
 }
 
 
 
-function comprobar(pos,id){
+
+function bloquearTodo(cartas,pos1,pos2){
+	for (var i =0; i<cartas ; i++) {
+		posicion ="check"+i;
+		
+	
+		if (posicion=="check"+pos1 || posicion=="check"+pos2) {
+			
+			continue;
+			
+		}else{
+			
+			document.getElementById(posicion).disabled=true;
+		}
+		
+	}
+	
+}
+
+function desbloquearTodo(cartas,pos1,pos2){
+	for (var i =0; i<cartas ; i++) {
+		posicion ="check"+i;
+		document.getElementById(posicion).disabled=false;
+		
+	}
+	
+}
+
+
+
+
+
+function comprobar(pos,id,total){
+	if (contador==0) {cronometro();}
+	contador=1;
 	clics2++;
 	intentos1(intentos);
+	cartas=total*2;    //Aqui consigo saber todas las cartas que hay en el tablero
 
 
 	if (clics2==1) {
 		carta1=id;
 		pos1=pos;
-		label1=document.getElementsByClassName('card')[pos].parentNode;
+		label1=document.getElementsByClassName('card')[pos].parentNode;  //cojo la label para despues poder clicar y dar la vuelta a la carta
 	}
 	
 	else if (clics2==2){
-		bloquearTodo();
+		
 		pos2=pos;
 		carta2=id;
 		label2=document.getElementsByClassName('card')[pos].parentNode;
 		
 
 		if (carta1==carta2) {
-			puntuacion++;	
+				
 			intentos++;
-			borraId(pos1,pos2);
-			intentos1(intentos);		
+			intentos1(intentos);
+			puntos();		
 			
 		}else{
-			
-			setTimeout( function(){
+			bloquearTodo(cartas,pos1,pos2);  //bloquea todas las cartas para no poder girarlas
+			setTimeout( function(){         //temporizador para que de tiempo a ver las cartas
 				clics2=0;				
-				desbloquear(pos1,pos2);
+				desbloquearTodo(cartas);  //desbloquea todas lar cartas para volver a poder girar
 				darVuelta(label1,label2)
 			} , 2000);
 			intentos++;
