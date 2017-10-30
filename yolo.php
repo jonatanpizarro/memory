@@ -2,15 +2,34 @@
 <link rel="stylesheet" type="text/css" href="mem.css">
 <script src="func.js" type="text/javascript"></script>
 
+<body> 
+ <audio id="gir">
+  <source src="Audios/gira" type="audio/mpeg">
+  </audio>
+  <audio id="cor">
+  <source src="Audios/cor" type="audio/mpeg">
+
+</audio> 
+
+ <audio id="inc">
+  <source src="Audios/inc" type="audio/mpeg">
+
+</audio> 
+
+<audio id="vic">
+  <source src="Audios/vic" type="audio/mpeg">
+
+</audio> 
+	
 </head>
-<body onload="" >
 	<div>
 		<div id="info" >
 			<nav>
 			<a id="intentos"> Intentos : 0</a> |
-			<button onclick="ayuda()"> Help</button>|
 			<span id="min">0</span>:<span id="seg">0</span>|
-			<a id="puntos">Puntuacion : 0</a>
+			<a id="puntos">Puntuacion : 0</a>|
+			<button onclick="ayuda()"> Wall hack</button>|
+			<button onclick="location='inicio.php'"> Rage quit</button>
 			</nav>
 		
 		
@@ -65,7 +84,7 @@
 										<input class='che' id='check$posicion' type='checkbox'/>
 										    <div class='card'>
 
-										         <div class='front'  ><img   onClick='comprobar(".$posicion.",i".$a.",".$parejas.")' src='imagenes/carta.jpeg' width='90' height='100'></div>
+										         <div class='front'  ><img   onClick='comprobar(".$posicion.",i".$a.",".$parejas.")' src='imagenes/carta.png' width='90' height='100'></div>
 
 								        		 <div class='back'><img id=i".$a." onClick='bloquear(".$posicion.",i".$a.")' src='imagenes/".$a.".png' width='90' height='100'></div>
 										    </div>

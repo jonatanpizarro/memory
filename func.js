@@ -8,6 +8,7 @@ var cartas=0;
 var tiempo=0;
 var parejas=0;
 var contador=0;
+var ayudas=0;
 
 
 
@@ -40,7 +41,7 @@ function puntos(){
 }
 
 function bloquear(pos){
-	document.getElementById("check"+pos).disabled=true;  //Si la carta esta de cara no te deja volver a clickar
+	document.getElementById("check"+pos).disabled=true;  //Si la carta esta de cara no te deja volver a clicar
 
 }
 
@@ -57,25 +58,27 @@ function intentos1(intentos){
 
 function ayuda(){
 	
-	//total=parejas*2;
+	if(ayudas<3){
 
-	for (var i = 0; i <totalCartas; i++) {
-		
-		la=document.getElementsByClassName('card')[i];        //Gira todas las cartas
-		la.click();
-	}	
+		for (var i = 0; i <totalCartas; i++) {
+			
+			la=document.getElementsByClassName('card')[i];        //Gira todas las cartas
+			la.click();
+		}	
 
-	setTimeout( function(){         
-				for (var i = 0; i <totalCartas; i++) {
+		setTimeout( function(){         
+					for (var i = 0; i <totalCartas; i++) {
+			
+			la=document.getElementsByClassName('card')[i].parentNode;        
+			la.click();
+		}
+				} , 2000);
 		
-		la=document.getElementsByClassName('card')[i].parentNode;        
-		la.click();
-	}
-			} , 2000);
-	
-	intentos=intentos+parejas;
-	intentos1(intentos);
-}
+		intentos=intentos+5;
+		intentos1(intentos);
+		ayudas=ayudas+1;
+	}}
+
 
 function valor(par){
 	parejas=par;
@@ -118,6 +121,7 @@ function desbloquearTodo(cartas,pos1,pos2){
 
 
 function comprobar(pos,id,total){
+	document.getElementById('gir').play();
 	if (contador==0) {cronometro();}
 	contador=1;
 	clics2++;
@@ -129,6 +133,7 @@ function comprobar(pos,id,total){
 		carta1=id;
 		pos1=pos;
 		label1=document.getElementsByClassName('card')[pos].parentNode;  //cojo la label para despues poder clicar y dar la vuelta a la carta
+		
 	}
 	
 	else if (clics2==2){
@@ -142,9 +147,16 @@ function comprobar(pos,id,total){
 				
 			intentos++;
 			intentos1(intentos);
-			puntos();		
+			puntos();	
+			if (total==puntuacion) {
+				document.getElementById('vic').play();
+				alert("HAS GANADO");
+			}	
+			clics2=0;
+			document.getElementById('cor').play();
 			
 		}else{
+			document.getElementById('inc').play();
 			bloquearTodo(cartas,pos1,pos2);  //bloquea todas las cartas para no poder girarlas
 			setTimeout( function(){         //temporizador para que de tiempo a ver las cartas
 				clics2=0;				

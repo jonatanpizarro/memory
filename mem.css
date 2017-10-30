@@ -7,9 +7,14 @@ label {
     cursor: pointer;
 
 }
+body{
+    background-image: url(imagenes/fondo1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 #info{
-    background-color: red;
+    
     height: 70px;
 }
 
@@ -54,7 +59,7 @@ input {
 
 table {
 	text-align: center;
-	height: 800px;
+	height: 100%;
 	width: 85%;
 	margin-left: 100px;
 }

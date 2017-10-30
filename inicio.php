@@ -2,18 +2,16 @@
 
 <style type="text/css">
 	body{
-		background-image: url(m.jpeg);
-		background-repeat : no-repeat;
-		background-position : center;
-		background-attachment : fixed;
-		height: 100%;
+		background-image: url(imagenes/fondo1.jpg);
+	    background-repeat: no-repeat;
+	    background-size: cover;
 
 	}
 
 	#contenedor {
 		width: 1300px;
 		height: 700px;
-		background-color: red;
+		background-color: ;
 		
 	}
 
@@ -23,7 +21,7 @@
 		height: 300px;
 		margin-top: 200px;
 		margin-left: 350px;
-		background-color: green;
+		background-color:  	#DCDCDC;
 	}
 
 	#iniciar {
@@ -60,7 +58,8 @@
 
 			<div id="fil">
 		
-				<select name="OS">
+				Selecciona nivel<select name="OS">
+				<option name ="a" value="2x2">2x2</option> 
 				   <option name ="a" value="4x4">4x4</option> 
 				   <option name ="a" value="6x6">6x6</option> 
 				   <option name ="a" value="8x8">8x8</option>
